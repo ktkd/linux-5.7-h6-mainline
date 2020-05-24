@@ -1,5 +1,5 @@
 # linux-5.7-h6-mainline
-Linux kernel config and patches for Generic H6 tvbox( Tanix TX6 , T95 MAX and posible others) based on Allwinner H6 CPU
+Linux kernel config and patches for Generic Allwinner H6 tvbox( Tanix TX6 , T95 MAX and posible others) based on Allwinner H6 CPU
 
 _Thank you guys from linux-sunxi mail-list and linux-sunxi portal with CPU documentations_
 
