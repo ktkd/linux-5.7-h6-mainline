@@ -1,0 +1,622 @@
+diff --git arch/arm64/boot/dts/allwinner/sun50i-h6-tanix-tx6.dts arch/arm64/boot/dts/allwinner/sun50i-h6-tanix-tx6.dts
+index 83e6cb0e5..1aca7b344 100644
+--- arch/arm64/boot/dts/allwinner/sun50i-h6-tanix-tx6.dts
++++ arch/arm64/boot/dts/allwinner/sun50i-h6-tanix-tx6.dts
+@@ -4,7 +4,7 @@
+ /dts-v1/;
+ 
+ #include "sun50i-h6.dtsi"
+-
++#include "sun50i-h6-cpu-opp.dtsi"
+ #include <dt-bindings/gpio/gpio.h>
+ 
+ / {
+@@ -12,7 +12,9 @@
+ 	compatible = "oranth,tanix-tx6", "allwinner,sun50i-h6";
+ 
+ 	aliases {
++		 ethernet0 = &emac;
+ 		serial0 = &uart0;
++                ethernet1 = &xr819;
+ 	};
+ 
+ 	chosen {
+@@ -31,12 +33,99 @@
+ 		};
+ 	};
+ 
++        leds {
++                compatible = "gpio-leds";
++
++
++                blue {
++                        label = "h6:led1";
++                        gpios = <&r_pio 0 4 GPIO_ACTIVE_LOW>; /* PL4 */
++                };
++
++                red {
++                        label = "h6:led2";
++                        gpios = <&r_pio 0 7 GPIO_ACTIVE_LOW>; /* PL7 */
++                };
++
++        };
++
++    sound-spdif {
++        compatible = "simple-audio-card";
++        simple-audio-card,name = "sun50i-h6-spdif";
++
++        simple-audio-card,cpu {
++            sound-dai = <&spdif>;
++        };
++
++        simple-audio-card,codec {
++            sound-dai = <&spdif_out>;
++        };
++    };
++
++    spdif_out: spdif-out {
++        #sound-dai-cells = <0>;
++        compatible = "linux,spdif-dit";
++    };
++
++	reg_usb_vbus: vbus {
++		compatible = "regulator-fixed";
++		regulator-name = "usb-vbus";
++		regulator-min-microvolt = <5000000>;
++		regulator-max-microvolt = <5000000>;
++		startup-delay-us = <100000>;
++		gpio = <&r_pio 0 5 GPIO_ACTIVE_HIGH>;
++		enable-active-high;
++	};
++
++	wifi_pwrseq: wifi_pwrseq {
++		compatible = "mmc-pwrseq-simple";
++		clocks = <&rtc 1>;
++		clock-names = "ext_clock";
++		reset-gpios = <&r_pio 1 3 GPIO_ACTIVE_LOW>; /* PM3 */
++		post-power-on-delay-ms = <200>;
++	};
++
++        reg_vcc5v: vcc5v {
++                /* board wide 5V supply directly from the DC jack */
++                compatible = "regulator-fixed";
++                regulator-name = "vcc-5v";
++                regulator-min-microvolt = <5000000>;
++                regulator-max-microvolt = <5000000>;
++                regulator-always-on;
++        };
++
++	reg_vcc1v8: vcc1v8 {
++		compatible = "regulator-fixed";
++		regulator-name = "vcc1v8";
++		regulator-min-microvolt = <1800000>;
++		regulator-max-microvolt = <1800000>;
++	};
++
+ 	reg_vcc3v3: vcc3v3 {
+ 		compatible = "regulator-fixed";
+ 		regulator-name = "vcc3v3";
+ 		regulator-min-microvolt = <3300000>;
+ 		regulator-max-microvolt = <3300000>;
+ 	};
++	reg_vdd_cpu_gpu: vdd-cpu-gpu {
++		compatible = "regulator-fixed";
++		regulator-name = "vdd-cpu-gpu";
++		regulator-min-microvolt = <1135000>;
++		regulator-max-microvolt = <1135000>;
++    };
++
++};
++
++&cpu0 {
++    cpu-supply = <&reg_vdd_cpu_gpu>;
++};
++
++&ac200_ephy {
++	status = "okay";
++};
++
++&ac200_pwm_clk {
++	status = "okay";
+ };
+ 
+ &de {
+@@ -47,6 +136,16 @@
+ 	status = "okay";
+ };
+ 
++&emac {
++	pinctrl-names = "default";
++	pinctrl-0 = <&ext_rmii_pins>;
++	phy-mode = "rmii";
++	phy-handle = <&ext_rmii_phy>;
++        allwinner,rx-delay-ps = <1500>;
++        allwinner,tx-delay-ps = <700>;
++	status = "okay";
++};
++
+ &ehci0 {
+ 	status = "okay";
+ };
+@@ -56,6 +155,7 @@
+ };
+ 
+ &gpu {
++	mali-supply = <&reg_vdd_cpu_gpu>;
+ 	status = "okay";
+ };
+ 
+@@ -69,6 +169,30 @@
+ 	};
+ };
+ 
++&i2c0 {
++        status = "okay";
++};
++
++&i2c1 {
++        status = "okay";
++};
++
++&i2c2 {
++        status = "okay";
++};
++
++&i2c3 {
++	status = "okay";
++};
++
++&mdio {
++	ext_rmii_phy: ethernet-phy@1 {
++		compatible = "ethernet-phy-ieee802.3-c22";
++		reg = <1>;
++
++	};
++};
++
+ &mmc0 {
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&mmc0_pins>;
+@@ -78,6 +202,41 @@
+ 	status = "okay";
+ };
+ 
++
++
++&mmc1 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&mmc1_pins>;
++	vmmc-supply = <&reg_vcc3v3>;
++	vqmmc-supply = <&reg_vcc1v8>;
++	mmc-pwrseq = <&wifi_pwrseq>;
++	bus-width = <4>;
++	non-removable;
++	status = "okay";
++
++       /*
++         * Explicitly define the sdio device, so that we can add an ethernet
++         * alias for it (which e.g. makes u-boot set a mac-address).
++         */
++        xr819: sdio_wifi@1 {
++                reg = <1>;
++		compatible = "xradio,xr819";
++		interrupt-parent = <&r_pio>;
++                local-mac-address = [dc 44 6d c0 ff ee];
++		interrupts = <1 0 IRQ_TYPE_EDGE_RISING>;	/* PM0 */
++		interrupt-names = "host-wake";
++        };
++};
++
++&mmc2 {
++	vmmc-supply = <&reg_vcc3v3>;
++	vqmmc-supply = <&reg_vcc1v8>;
++	non-removable;
++	cap-mmc-hw-reset;
++	bus-width = <8>;
++	status = "okay";
++};
++
+ &ohci0 {
+ 	status = "okay";
+ };
+@@ -86,11 +245,21 @@
+ 	status = "okay";
+ };
+ 
++
++&pwm {
++	status = "okay";
++};
++
+ &r_ir {
+ 	linux,rc-map-name = "rc-tanix-tx5max";
+ 	status = "okay";
+ };
+ 
++
++&spdif {
++	status = "okay";
++};
++
+ &uart0 {
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&uart0_ph_pins>;
+@@ -106,6 +275,8 @@
+ 	status = "okay";
+ };
+ 
++
+ &usb3phy {
++	phy-supply = <&reg_usb_vbus>;
+ 	status = "okay";
+ };
+ 
+
+diff --git arch/arm64/boot/dts/allwinner/sun50i-h6-cpu-opp.dtsi arch/arm64/boot/dts/allwinner/sun50i-h6-cpu-opp.dtsi
+new file mode 100644
+index 000000000..d23c3fa22
+--- /dev/null
++++ arch/arm64/boot/dts/allwinner/sun50i-h6-cpu-opp.dtsi
+@@ -0,0 +1,117 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++// Copyright (C) 2020 Ondrej Jirman <megous@megous.com>
++// Copyright (C) 2020 Clément Péron <peron.clem@gmail.com>
++
++/ {
++	cpu_opp_table: cpu-opp-table {
++		compatible = "allwinner,sun50i-h6-operating-points";
++		nvmem-cells = <&cpu_speed_grade>;
++		opp-shared;
++
++		opp@480000000 {
++			clock-latency-ns = <244144>; /* 8 32k periods */
++			opp-hz = /bits/ 64 <480000000>;
++
++			opp-microvolt-speed0 = <880000 880000 1200000>;
++			opp-microvolt-speed1 = <820000 820000 1200000>;
++			opp-microvolt-speed2 = <820000 820000 1200000>;
++		};
++
++		opp@720000000 {
++			clock-latency-ns = <244144>; /* 8 32k periods */
++			opp-hz = /bits/ 64 <720000000>;
++
++                        opp-microvolt-speed0 = <880000 880000 1200000>;
++                        opp-microvolt-speed1 = <820000 820000 1200000>;
++                        opp-microvolt-speed2 = <820000 820000 1200000>;
++		};
++
++		opp@816000000 {
++			clock-latency-ns = <244144>; /* 8 32k periods */
++			opp-hz = /bits/ 64 <816000000>;
++
++                        opp-microvolt-speed0 = <880000 880000 1200000>;
++                        opp-microvolt-speed1 = <820000 820000 1200000>;
++                        opp-microvolt-speed2 = <820000 820000 1200000>;
++		};
++
++		opp@888000000 {
++			clock-latency-ns = <244144>; /* 8 32k periods */
++			opp-hz = /bits/ 64 <888000000>;
++
++                        opp-microvolt-speed0 = <880000 880000 1200000>;
++                        opp-microvolt-speed1 = <820000 820000 1200000>;
++                        opp-microvolt-speed2 = <820000 820000 1200000>;
++		};
++
++		opp@1080000000 {
++			clock-latency-ns = <244144>; /* 8 32k periods */
++			opp-hz = /bits/ 64 <1080000000>;
++
++                        opp-microvolt-speed0 = <880000 880000 1200000>;
++                        opp-microvolt-speed1 = <820000 820000 1200000>;
++                        opp-microvolt-speed2 = <820000 820000 1200000>;
++		};
++
++		opp@1320000000 {
++			clock-latency-ns = <244144>; /* 8 32k periods */
++			opp-hz = /bits/ 64 <1320000000>;
++
++                        opp-microvolt-speed0 = <880000 880000 1200000>;
++                        opp-microvolt-speed1 = <820000 820000 1200000>;
++                        opp-microvolt-speed2 = <820000 820000 1200000>;
++		};
++
++		opp@1488000000 {
++			clock-latency-ns = <244144>; /* 8 32k periods */
++			opp-hz = /bits/ 64 <1488000000>;
++
++                        opp-microvolt-speed0 = <880000 880000 1200000>;
++                        opp-microvolt-speed1 = <820000 820000 1200000>;
++                        opp-microvolt-speed2 = <820000 820000 1200000>;
++		};
++
++		opp@1608000000 {
++			clock-latency-ns = <244144>; /* 8 32k periods */
++			opp-hz = /bits/ 64 <1608000000>;
++
++                        opp-microvolt-speed0 = <880000 880000 1200000>;
++                        opp-microvolt-speed1 = <820000 820000 1200000>;
++                        opp-microvolt-speed2 = <820000 820000 1200000>;
++		};
++
++		opp@1704000000 {
++			clock-latency-ns = <244144>; /* 8 32k periods */
++			opp-hz = /bits/ 64 <1704000000>;
++
++                        opp-microvolt-speed0 = <880000 880000 1200000>;
++                        opp-microvolt-speed1 = <820000 820000 1200000>;
++                        opp-microvolt-speed2 = <820000 820000 1200000>;
++		};
++
++		opp@1800000000 {
++			clock-latency-ns = <244144>; /* 8 32k periods */
++			opp-hz = /bits/ 64 <1800000000>;
++
++                        opp-microvolt-speed0 = <880000 880000 1200000>;
++                        opp-microvolt-speed1 = <820000 820000 1200000>;
++                        opp-microvolt-speed2 = <820000 820000 1200000>;
++		};
++	};
++};
++
++&cpu0 {
++	operating-points-v2 = <&cpu_opp_table>;
++};
++
++&cpu1 {
++	operating-points-v2 = <&cpu_opp_table>;
++};
++
++&cpu2 {
++	operating-points-v2 = <&cpu_opp_table>;
++};
++
++&cpu3 {
++	operating-points-v2 = <&cpu_opp_table>;
++};
+
+
+diff --git arch/arm64/boot/dts/allwinner/sun50i-h6.dtsi arch/arm64/boot/dts/allwinner/sun50i-h6.dtsi
+index b9ab7d8fa..2b6f942a5 100644
+--- arch/arm64/boot/dts/allwinner/sun50i-h6.dtsi
++++ arch/arm64/boot/dts/allwinner/sun50i-h6.dtsi
+@@ -16,6 +16,16 @@
+ 	#address-cells = <1>;
+ 	#size-cells = <1>;
+ 
++
++	ac200_pwm_clk: ac200_clk {
++		compatible = "pwm-clock";
++		#clock-cells = <0>;
++		clock-frequency = <24000000>;
++		pinctrl-names = "default";
++		pinctrl-0 = <&pwm1_pin>;
++		pwms = <&pwm 1 42 0>;
++		status = "okay";
++	};
+ 	cpus {
+ 		#address-cells = <1>;
+ 		#size-cells = <0>;
+@@ -23,29 +33,41 @@
+ 		cpu0: cpu@0 {
+ 			compatible = "arm,cortex-a53";
+ 			device_type = "cpu";
++			#cooling-cells = <2>;
+ 			reg = <0>;
+ 			enable-method = "psci";
++		        clocks = <&ccu CLK_CPUX>;
++	                clock-latency-ns = <244144>; /* 8 32k periods */
+ 		};
+ 
+ 		cpu1: cpu@1 {
+ 			compatible = "arm,cortex-a53";
+ 			device_type = "cpu";
++                        #cooling-cells = <2>;
+ 			reg = <1>;
+ 			enable-method = "psci";
++                        clocks = <&ccu CLK_CPUX>;
++                        clock-latency-ns = <244144>; /* 8 32k periods */
+ 		};
+ 
+ 		cpu2: cpu@2 {
+ 			compatible = "arm,cortex-a53";
+ 			device_type = "cpu";
++                        #cooling-cells = <2>;
+ 			reg = <2>;
+ 			enable-method = "psci";
++                        clocks = <&ccu CLK_CPUX>;
++                        clock-latency-ns = <244144>; /* 8 32k periods */
+ 		};
+ 
+ 		cpu3: cpu@3 {
+ 			compatible = "arm,cortex-a53";
+ 			device_type = "cpu";
++                        #cooling-cells = <2>;
+ 			reg = <3>;
+ 			enable-method = "psci";
++                        clocks = <&ccu CLK_CPUX>;
++                        clock-latency-ns = <244144>; /* 8 32k periods */
+ 		};
+ 	};
+ 
+@@ -88,6 +110,24 @@
+ 			(GIC_CPU_MASK_SIMPLE(4) | IRQ_TYPE_LEVEL_HIGH)>;
+ 	};
+ 
++	sound_hdmi: sound {
++		compatible = "simple-audio-card";
++		simple-audio-card,format = "i2s";
++		simple-audio-card,name = "allwinner-hdmi";
++		simple-audio-card,mclk-fs = <128>;
++		simple-audio-card,frame-inversion;
++
++		simple-audio-card,codec {
++			sound-dai = <&hdmi>;
++		};
++
++		simple-audio-card,cpu {
++			sound-dai = <&i2s1>;
++			dai-tdm-slot-num = <2>;
++			dai-tdm-slot-width = <32>;
++		};
++	};
++
+ 	soc {
+ 		compatible = "simple-bus";
+ 		#address-cells = <1>;
+@@ -240,6 +280,12 @@
+ 			ths_calibration: thermal-sensor-calibration@14 {
+ 				reg = <0x14 0x8>;
+ 			};
++			cpu_speed_grade: cpu-speed-grade@1c {
++				reg = <0x1c 0x4>;
++			};
++			ephy_calibration: ephy-calibration@2c {
++				reg = <0x2c 0x2>;
++			};
+ 		};
+ 
+ 		watchdog: watchdog@30090a0 {
+@@ -284,6 +330,19 @@
+ 				drive-strength = <40>;
+ 			};
+ 
++			i2c3_pins: i2c3-pins {
++				pins = "PB17", "PB18";
++				function = "i2c3";
++			};
++			/omit-if-no-ref/
++			ext_rmii_pins: rmii_pins {
++				pins = "PA0", "PA1", "PA2", "PA3", "PA4",
++				       "PA5", "PA6", "PA7", "PA8", "PA9";
++				function = "emac";
++				drive-strength = <40>;
++			};
++
++
+ 			hdmi_pins: hdmi-pins {
+ 				pins = "PH8", "PH9", "PH10";
+ 				function = "hdmi";
+@@ -321,6 +380,11 @@
+ 				bias-pull-up;
+ 			};
+ 
++			pwm1_pin: pwm1-pin {
++				pins = "PB19";
++				function = "pwm1";
++			};
++
+ 			mmc2_pins: mmc2-pins {
+ 				pins = "PC1", "PC4", "PC5", "PC6",
+ 				       "PC7", "PC8", "PC9", "PC10",
+@@ -551,6 +615,36 @@
+ 			#size-cells = <0>;
+ 		};
+ 
++		i2c3: i2c@5002c00 {
++			compatible = "allwinner,sun50i-h6-i2c",
++				     "allwinner,sun6i-a31-i2c";
++			reg = <0x05002c00 0x400>;
++			interrupts = <GIC_SPI 7 IRQ_TYPE_LEVEL_HIGH>;
++			clocks = <&ccu CLK_BUS_I2C3>;
++			resets = <&ccu RST_BUS_I2C3>;
++			pinctrl-names = "default";
++			pinctrl-0 = <&i2c3_pins>;
++			status = "okay";
++			#address-cells = <1>;
++			#size-cells = <0>;
++
++			ac200: mfd@10 {
++				compatible = "x-powers,ac200";
++				reg = <0x10>;
++				interrupt-parent = <&pio>;
++				interrupts = <1 20 IRQ_TYPE_LEVEL_LOW>;
++				interrupt-controller;
++				#interrupt-cells = <1>;
++
++				ac200_ephy: phy {
++					compatible = "x-powers,ac200-ephy";
++					clocks = <&ac200_pwm_clk>;
++					nvmem-cells = <&ephy_calibration>;
++					nvmem-cell-names = "calibration";
++					status = "okay";
++				};
++			};
++		};
+ 		emac: ethernet@5020000 {
+ 			compatible = "allwinner,sun50i-h6-emac",
+ 				     "allwinner,sun50i-a64-emac";
+@@ -586,6 +680,18 @@
+ 			status = "disabled";
+ 		};
+ 
++        i2s1: i2s@5091000 {
++            #sound-dai-cells = <0>;
++            compatible = "allwinner,sun50i-h6-i2s";
++            reg = <0x05091000 0x1000>;
++            interrupts = <GIC_SPI 19 IRQ_TYPE_LEVEL_HIGH>;
++            clocks = <&ccu CLK_BUS_I2S1>, <&ccu CLK_I2S1>;
++            clock-names = "apb", "mod";
++            dmas = <&dma 4>;
++            resets = <&ccu RST_BUS_I2S1>;
++            dma-names = "tx";
++            allwinner,playback-channels = <8>;
++        };
+ 		usb2otg: usb@5100000 {
+ 			compatible = "allwinner,sun50i-h6-musb",
+ 				     "allwinner,sun8i-a33-musb";
+@@ -701,6 +807,7 @@
+ 		};
+ 
+ 		hdmi: hdmi@6000000 {
++			#sound-dai-cells = <0>;
+ 			compatible = "allwinner,sun50i-h6-dw-hdmi";
+ 			reg = <0x06000000 0x10000>;
+ 			reg-io-width = <1>;
+@@ -946,6 +1053,29 @@
+ 			polling-delay-passive = <0>;
+ 			polling-delay = <0>;
+ 			thermal-sensors = <&ths 0>;
++			trips {
++				cpu_alert: cpu-alert {
++					temperature = <85000>;
++					hysteresis = <2000>;
++					type = "passive";
++				};
++
++				cpu-crit {
++					temperature = <100000>;
++					hysteresis = <0>;
++					type = "critical";
++				};
++			};
++
++			cooling-maps {
++				map0 {
++					trip = <&cpu_alert>;
++					cooling-device = <&cpu0 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
++						<&cpu1 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
++						<&cpu2 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
++						<&cpu3 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>;
++				};
++			};
+ 		};
+ 
+ 		gpu-thermal {
+
+
+diff --git arch/arm64/configs/defconfig arch/arm64/configs/defconfig
+index 03d0189f7..e51d875ce 100644
+--- arch/arm64/configs/defconfig
++++ arch/arm64/configs/defconfig
+@@ -168,6 +168,7 @@ CONFIG_CAN=m
+ CONFIG_CAN_RCAR=m
+ CONFIG_CAN_RCAR_CANFD=m
+ CONFIG_CAN_FLEXCAN=m
++CONFIG_ARM_ALLWINNER_SUN50I_CPUFREQ_NVMEM=m
+ CONFIG_BT=m
+ CONFIG_BT_HIDP=m
+ # CONFIG_BT_HS is not set
+
+
