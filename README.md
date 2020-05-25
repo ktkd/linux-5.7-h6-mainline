@@ -20,10 +20,10 @@ work fine:
  * usb/usb3
  * i2c
  * gpio led
- * hdmi(with audio and CEC posible)
+ * hdmi
  * CPU dvfs/frequency change
  * Temperature sensors
- * GPU with opengles (possible with opencl need to test this moment)
+ * GPU with opengles
  * IR (hardcoded tanix tx6 remote keymap)
 
 n/a:
