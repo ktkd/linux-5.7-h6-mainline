@@ -1,7 +1,7 @@
 diff --git arch/arm64/boot/dts/allwinner/sun50i-h6-tanix-tx6.dts arch/arm64/boot/dts/allwinner/sun50i-h6-tanix-tx6.dts
 index 83e6cb0e5..1aca7b344 100644
---- arch/arm64/boot/dts/allwinner/sun50i-h6-tanix-tx6.dts
-+++ arch/arm64/boot/dts/allwinner/sun50i-h6-tanix-tx6.dts
+--- a/arch/arm64/boot/dts/allwinner/sun50i-h6-tanix-tx6.dts
++++ b/arch/arm64/boot/dts/allwinner/sun50i-h6-tanix-tx6.dts
 @@ -4,7 +4,7 @@
  /dts-v1/;
  
@@ -256,7 +256,7 @@ diff --git arch/arm64/boot/dts/allwinner/sun50i-h6-cpu-opp.dtsi arch/arm64/boot/
 new file mode 100644
 index 000000000..d23c3fa22
 --- /dev/null
-+++ arch/arm64/boot/dts/allwinner/sun50i-h6-cpu-opp.dtsi
++++ b/arch/arm64/boot/dts/allwinner/sun50i-h6-cpu-opp.dtsi
 @@ -0,0 +1,117 @@
 +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
 +// Copyright (C) 2020 Ondrej Jirman <megous@megous.com>
@@ -379,8 +379,8 @@ index 000000000..d23c3fa22
 
 diff --git arch/arm64/boot/dts/allwinner/sun50i-h6.dtsi arch/arm64/boot/dts/allwinner/sun50i-h6.dtsi
 index b9ab7d8fa..2b6f942a5 100644
---- arch/arm64/boot/dts/allwinner/sun50i-h6.dtsi
-+++ arch/arm64/boot/dts/allwinner/sun50i-h6.dtsi
+--- a/arch/arm64/boot/dts/allwinner/sun50i-h6.dtsi
++++ b/arch/arm64/boot/dts/allwinner/sun50i-h6.dtsi
 @@ -16,6 +16,16 @@
  	#address-cells = <1>;
  	#size-cells = <1>;
@@ -608,8 +608,8 @@ index b9ab7d8fa..2b6f942a5 100644
 
 diff --git arch/arm64/configs/defconfig arch/arm64/configs/defconfig
 index 03d0189f7..e51d875ce 100644
---- arch/arm64/configs/defconfig
-+++ arch/arm64/configs/defconfig
+--- a/arch/arm64/configs/defconfig
++++ b/arch/arm64/configs/defconfig
 @@ -168,6 +168,7 @@ CONFIG_CAN=m
  CONFIG_CAN_RCAR=m
  CONFIG_CAN_RCAR_CANFD=m

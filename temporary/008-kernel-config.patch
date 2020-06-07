@@ -2,7 +2,7 @@ diff --git .config .config
 new file mode 100644
 index 000000000..ccb97cb78
 --- /dev/null
-+++ .config
++++ b/.config
 @@ -0,0 +1,9476 @@
 +#
 +# Automatically generated file; DO NOT EDIT.

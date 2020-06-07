@@ -1,7 +1,7 @@
 diff --git drivers/staging/media/sunxi/cedrus/cedrus_h264.c drivers/staging/media/sunxi/cedrus/cedrus_h264.c
 index 54ee2aa42..c336366f6 100644
---- drivers/staging/media/sunxi/cedrus/cedrus_h264.c
-+++ drivers/staging/media/sunxi/cedrus/cedrus_h264.c
+--- a/drivers/staging/media/sunxi/cedrus/cedrus_h264.c
++++ b/drivers/staging/media/sunxi/cedrus/cedrus_h264.c
 @@ -55,16 +55,14 @@ static void cedrus_h264_write_sram(struct cedrus_dev *dev,
  }
  
@@ -243,8 +243,8 @@ index 54ee2aa42..c336366f6 100644
 
 diff --git Documentation/media/uapi/v4l/ext-ctrls-codec.rst Documentation/media/uapi/v4l/ext-ctrls-codec.rst
 index d4fc5f25a..0d85a3ec0 100644
---- Documentation/media/uapi/v4l/ext-ctrls-codec.rst
-+++ Documentation/media/uapi/v4l/ext-ctrls-codec.rst
+--- a/Documentation/media/uapi/v4l/ext-ctrls-codec.rst
++++ b/Documentation/media/uapi/v4l/ext-ctrls-codec.rst
 @@ -3991,6 +3991,9 @@ enum v4l2_mpeg_video_hevc_size_of_length_field -
      * - __u32
        - ``data_bit_offset``
@@ -315,8 +315,8 @@ index d4fc5f25a..0d85a3ec0 100644
 
 diff --git Documentation/media/uapi/v4l/pixfmt-compressed.rst Documentation/media/uapi/v4l/pixfmt-compressed.rst
 index 561bda112..3aabc322d 100644
---- Documentation/media/uapi/v4l/pixfmt-compressed.rst
-+++ Documentation/media/uapi/v4l/pixfmt-compressed.rst
+--- a/Documentation/media/uapi/v4l/pixfmt-compressed.rst
++++ b/Documentation/media/uapi/v4l/pixfmt-compressed.rst
 @@ -207,6 +207,7 @@ Compressed Formats
          * ``V4L2_CID_MPEG_VIDEO_HEVC_SPS``
          * ``V4L2_CID_MPEG_VIDEO_HEVC_PPS``
@@ -328,8 +328,8 @@ index 561bda112..3aabc322d 100644
 
 diff --git drivers/media/v4l2-core/v4l2-ctrls.c drivers/media/v4l2-core/v4l2-ctrls.c
 index 93d33d1db..94c3e64ff 100644
---- drivers/media/v4l2-core/v4l2-ctrls.c
-+++ drivers/media/v4l2-core/v4l2-ctrls.c
+--- a/drivers/media/v4l2-core/v4l2-ctrls.c
++++ b/drivers/media/v4l2-core/v4l2-ctrls.c
 @@ -975,6 +975,7 @@ const char *v4l2_ctrl_get_name(u32 id)
  	case V4L2_CID_MPEG_VIDEO_HEVC_SPS:			return "HEVC Sequence Parameter Set";
  	case V4L2_CID_MPEG_VIDEO_HEVC_PPS:			return "HEVC Picture Parameter Set";
@@ -371,8 +371,8 @@ index 93d33d1db..94c3e64ff 100644
 
 diff --git include/media/hevc-ctrls.h include/media/hevc-ctrls.h
 index 1009cf089..d1b094c8a 100644
---- include/media/hevc-ctrls.h
-+++ include/media/hevc-ctrls.h
+--- a/include/media/hevc-ctrls.h
++++ b/include/media/hevc-ctrls.h
 @@ -19,6 +19,7 @@
  #define V4L2_CID_MPEG_VIDEO_HEVC_SPS		(V4L2_CID_MPEG_BASE + 1008)
  #define V4L2_CID_MPEG_VIDEO_HEVC_PPS		(V4L2_CID_MPEG_BASE + 1009)
@@ -426,8 +426,8 @@ index 1009cf089..d1b094c8a 100644
 
 diff --git drivers/staging/media/sunxi/cedrus/cedrus.c drivers/staging/media/sunxi/cedrus/cedrus.c
 index 05a85517f..e92d55331 100644
---- drivers/staging/media/sunxi/cedrus/cedrus.c
-+++ drivers/staging/media/sunxi/cedrus/cedrus.c
+--- a/drivers/staging/media/sunxi/cedrus/cedrus.c
++++ b/drivers/staging/media/sunxi/cedrus/cedrus.c
 @@ -116,6 +116,13 @@ static const struct cedrus_control cedrus_controls[] = {
  		.codec		= CEDRUS_CODEC_H265,
  		.required	= true,
@@ -462,8 +462,8 @@ index 05a85517f..e92d55331 100644
  
 diff --git drivers/staging/media/sunxi/cedrus/cedrus.h drivers/staging/media/sunxi/cedrus/cedrus.h
 index 96765555a..f8264953d 100644
---- drivers/staging/media/sunxi/cedrus/cedrus.h
-+++ drivers/staging/media/sunxi/cedrus/cedrus.h
+--- a/drivers/staging/media/sunxi/cedrus/cedrus.h
++++ b/drivers/staging/media/sunxi/cedrus/cedrus.h
 @@ -73,6 +73,7 @@ struct cedrus_h265_run {
  	const struct v4l2_ctrl_hevc_sps			*sps;
  	const struct v4l2_ctrl_hevc_pps			*pps;
@@ -515,8 +515,8 @@ index 96765555a..f8264953d 100644
 
 diff --git drivers/staging/media/sunxi/cedrus/cedrus_dec.c drivers/staging/media/sunxi/cedrus/cedrus_dec.c
 index 4a2fc33a1..327ed6c26 100644
---- drivers/staging/media/sunxi/cedrus/cedrus_dec.c
-+++ drivers/staging/media/sunxi/cedrus/cedrus_dec.c
+--- a/drivers/staging/media/sunxi/cedrus/cedrus_dec.c
++++ b/drivers/staging/media/sunxi/cedrus/cedrus_dec.c
 @@ -66,6 +66,8 @@ void cedrus_device_run(void *priv)
  			V4L2_CID_MPEG_VIDEO_HEVC_PPS);
  		run.h265.slice_params = cedrus_find_control_data(ctx,
@@ -530,8 +530,8 @@ index 4a2fc33a1..327ed6c26 100644
 
 diff --git drivers/staging/media/sunxi/cedrus/cedrus_h265.c drivers/staging/media/sunxi/cedrus/cedrus_h265.c
 index ce497d019..8861e1535 100644
---- drivers/staging/media/sunxi/cedrus/cedrus_h265.c
-+++ drivers/staging/media/sunxi/cedrus/cedrus_h265.c
+--- a/drivers/staging/media/sunxi/cedrus/cedrus_h265.c
++++ b/drivers/staging/media/sunxi/cedrus/cedrus_h265.c
 @@ -91,26 +91,66 @@ static void cedrus_h265_sram_write_data(struct cedrus_dev *dev, void *data,
  
  static inline dma_addr_t
@@ -1003,8 +1003,8 @@ index ce497d019..8861e1535 100644
 
 diff --git drivers/staging/media/sunxi/cedrus/cedrus_regs.h drivers/staging/media/sunxi/cedrus/cedrus_regs.h
 index 66b152f18..150eae2d9 100644
---- drivers/staging/media/sunxi/cedrus/cedrus_regs.h
-+++ drivers/staging/media/sunxi/cedrus/cedrus_regs.h
+--- a/drivers/staging/media/sunxi/cedrus/cedrus_regs.h
++++ b/drivers/staging/media/sunxi/cedrus/cedrus_regs.h
 @@ -493,9 +493,15 @@
  #define VE_DEC_H265_ENTRY_POINT_OFFSET_ADDR	(VE_ENGINE_DEC_H265 + 0x64)
  #define VE_DEC_H265_TILE_START_CTB		(VE_ENGINE_DEC_H265 + 0x68)
@@ -1025,8 +1025,8 @@ index 66b152f18..150eae2d9 100644
 
 diff --git drivers/staging/media/sunxi/cedrus/cedrus_video.c drivers/staging/media/sunxi/cedrus/cedrus_video.c
 index 15cf1f102..daff14d0a 100644
---- drivers/staging/media/sunxi/cedrus/cedrus_video.c
-+++ drivers/staging/media/sunxi/cedrus/cedrus_video.c
+--- a/drivers/staging/media/sunxi/cedrus/cedrus_video.c
++++ b/drivers/staging/media/sunxi/cedrus/cedrus_video.c
 @@ -91,7 +91,7 @@ static struct cedrus_format *cedrus_find_format(u32 pixelformat, u32 directions,
  	return &cedrus_formats[i];
  }
@@ -1130,8 +1130,8 @@ index 15cf1f102..daff14d0a 100644
 
 diff --git drivers/staging/media/sunxi/cedrus/cedrus_video.h drivers/staging/media/sunxi/cedrus/cedrus_video.h
 index 05050c0a0..d42e4ebf6 100644
---- drivers/staging/media/sunxi/cedrus/cedrus_video.h
-+++ drivers/staging/media/sunxi/cedrus/cedrus_video.h
+--- a/drivers/staging/media/sunxi/cedrus/cedrus_video.h
++++ b/drivers/staging/media/sunxi/cedrus/cedrus_video.h
 @@ -26,6 +26,6 @@ extern const struct v4l2_ioctl_ops cedrus_ioctl_ops;
  
  int cedrus_queue_init(void *priv, struct vb2_queue *src_vq,
@@ -1142,8 +1142,8 @@ index 05050c0a0..d42e4ebf6 100644
  #endif
 diff --git include/drm/bridge/dw_hdmi.h include/drm/bridge/dw_hdmi.h
 index 0b34a12c4..c6d038826 100644
---- include/drm/bridge/dw_hdmi.h
-+++ include/drm/bridge/dw_hdmi.h
+--- a/include/drm/bridge/dw_hdmi.h
++++ b/include/drm/bridge/dw_hdmi.h
 @@ -144,6 +144,8 @@ struct dw_hdmi_plat_data {
  	int (*configure_phy)(struct dw_hdmi *hdmi,
  			     const struct dw_hdmi_plat_data *pdata,

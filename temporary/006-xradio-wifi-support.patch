@@ -1,7 +1,7 @@
-diff --git drivers/net/wireless/Kconfig drivers/net/wireless/Kconfig
+diff --git b/drivers/net/wireless/Kconfig b/drivers/net/wireless/Kconfig
 index 1c98d781a..4ee4b2d0c 100644
---- drivers/net/wireless/Kconfig
-+++ drivers/net/wireless/Kconfig
+--- a/drivers/net/wireless/Kconfig
++++ b/drivers/net/wireless/Kconfig
 @@ -47,6 +47,7 @@ source "drivers/net/wireless/st/Kconfig"
  source "drivers/net/wireless/ti/Kconfig"
  source "drivers/net/wireless/zydas/Kconfig"
@@ -10,10 +10,10 @@ index 1c98d781a..4ee4b2d0c 100644
  
  config PCMCIA_RAYCS
  	tristate "Aviator/Raytheon 2.4GHz wireless support"
-diff --git drivers/net/wireless/Makefile drivers/net/wireless/Makefile
+diff --git b/drivers/net/wireless/Makefile b/drivers/net/wireless/Makefile
 index 6cfe74515..c36c05d92 100644
---- drivers/net/wireless/Makefile
-+++ drivers/net/wireless/Makefile
+--- a/drivers/net/wireless/Makefile
++++ b/drivers/net/wireless/Makefile
 @@ -19,6 +19,7 @@ obj-$(CONFIG_WLAN_VENDOR_ST) += st/
  obj-$(CONFIG_WLAN_VENDOR_TI) += ti/
  obj-$(CONFIG_WLAN_VENDOR_ZYDAS) += zydas/
@@ -22,11 +22,11 @@ index 6cfe74515..c36c05d92 100644
  
  # 16-bit wireless PCMCIA client drivers
  obj-$(CONFIG_PCMCIA_RAYCS)	+= ray_cs.o
-diff --git drivers/net/wireless/xradio/Kconfig drivers/net/wireless/xradio/Kconfig
+diff --git b/drivers/net/wireless/xradio/Kconfig b/drivers/net/wireless/xradio/Kconfig
 new file mode 100644
 index 000000000..d3925eced
 --- /dev/null
-+++ drivers/net/wireless/xradio/Kconfig
++++ b/drivers/net/wireless/xradio/Kconfig
 @@ -0,0 +1,49 @@
 +# SPDX-License-Identifier: GPL-2.0-only
 +
@@ -77,11 +77,11 @@ index 000000000..d3925eced
 +	  If unsure, say Y.
 +
 +endif # WLAN_VENDOR_XRADIO
-diff --git drivers/net/wireless/xradio/LICENSE drivers/net/wireless/xradio/LICENSE
+diff --git b/drivers/net/wireless/xradio/LICENSE b/drivers/net/wireless/xradio/LICENSE
 new file mode 100644
 index 000000000..23cb79033
 --- /dev/null
-+++ drivers/net/wireless/xradio/LICENSE
++++ b/drivers/net/wireless/xradio/LICENSE
 @@ -0,0 +1,339 @@
 +                    GNU GENERAL PUBLIC LICENSE
 +                       Version 2, June 1991
@@ -422,11 +422,11 @@ index 000000000..23cb79033
 +consider it more useful to permit linking proprietary applications with the
 +library.  If this is what you want to do, use the GNU Lesser General
 +Public License instead of this License.
-diff --git drivers/net/wireless/xradio/Makefile drivers/net/wireless/xradio/Makefile
+diff --git b/drivers/net/wireless/xradio/Makefile b/drivers/net/wireless/xradio/Makefile
 new file mode 100644
 index 000000000..7a0de9ab7
 --- /dev/null
-+++ drivers/net/wireless/xradio/Makefile
++++ b/drivers/net/wireless/xradio/Makefile
 @@ -0,0 +1,60 @@
 +# SPDX-License-Identifier: GPL-2.0-only
 +
@@ -488,11 +488,11 @@ index 000000000..7a0de9ab7
 +
 +ldflags-y += --strip-debug
 +
-diff --git drivers/net/wireless/xradio/README.md drivers/net/wireless/xradio/README.md
+diff --git b/drivers/net/wireless/xradio/README.md b/drivers/net/wireless/xradio/README.md
 new file mode 100644
 index 000000000..35a987368
 --- /dev/null
-+++ drivers/net/wireless/xradio/README.md
++++ b/drivers/net/wireless/xradio/README.md
 @@ -0,0 +1,100 @@
 +# Driver for the Allwinner XRadio XR819 wifi chip #
 +
@@ -594,11 +594,11 @@ index 000000000..35a987368
 +
 +
 +
-diff --git drivers/net/wireless/xradio/ap.c drivers/net/wireless/xradio/ap.c
+diff --git b/drivers/net/wireless/xradio/ap.c b/drivers/net/wireless/xradio/ap.c
 new file mode 100644
 index 000000000..8b2d7b633
 --- /dev/null
-+++ drivers/net/wireless/xradio/ap.c
++++ b/drivers/net/wireless/xradio/ap.c
 @@ -0,0 +1,1632 @@
 +/*
 + * STA and AP APIs for XRadio drivers
@@ -2232,11 +2232,11 @@ index 000000000..8b2d7b633
 +	dev_kfree_skb(skb);
 +}
 +#endif
-diff --git drivers/net/wireless/xradio/ap.h drivers/net/wireless/xradio/ap.h
+diff --git b/drivers/net/wireless/xradio/ap.h b/drivers/net/wireless/xradio/ap.h
 new file mode 100644
 index 000000000..9d55fb86b
 --- /dev/null
-+++ drivers/net/wireless/xradio/ap.h
++++ b/drivers/net/wireless/xradio/ap.h
 @@ -0,0 +1,63 @@
 +/*
 + * STA and AP APIs for XRadio drivers
@@ -2301,11 +2301,11 @@ index 000000000..9d55fb86b
 +#endif
 +
 +#endif
-diff --git drivers/net/wireless/xradio/bh.c drivers/net/wireless/xradio/bh.c
+diff --git b/drivers/net/wireless/xradio/bh.c b/drivers/net/wireless/xradio/bh.c
 new file mode 100644
 index 000000000..c8a7b8615
 --- /dev/null
-+++ drivers/net/wireless/xradio/bh.c
++++ b/drivers/net/wireless/xradio/bh.c
 @@ -0,0 +1,835 @@
 +/*
 + * Data Transmission thread implementation for XRadio drivers
@@ -3142,11 +3142,11 @@ index 000000000..c8a7b8615
 +
 +	return 0;
 +}
-diff --git drivers/net/wireless/xradio/bh.h drivers/net/wireless/xradio/bh.h
+diff --git b/drivers/net/wireless/xradio/bh.h b/drivers/net/wireless/xradio/bh.h
 new file mode 100644
 index 000000000..ca9187e24
 --- /dev/null
-+++ drivers/net/wireless/xradio/bh.h
++++ b/drivers/net/wireless/xradio/bh.h
 @@ -0,0 +1,36 @@
 +/*
 + * Data Transmission thread for XRadio drivers
@@ -3184,11 +3184,11 @@ index 000000000..ca9187e24
 +int xradio_realloc_resv_skb(struct xradio_common *hw_priv,
 +							struct sk_buff *skb);
 +#endif /* XRADIO_BH_H */
-diff --git drivers/net/wireless/xradio/common.h drivers/net/wireless/xradio/common.h
+diff --git b/drivers/net/wireless/xradio/common.h b/drivers/net/wireless/xradio/common.h
 new file mode 100644
 index 000000000..1ce23dee0
 --- /dev/null
-+++ drivers/net/wireless/xradio/common.h
++++ b/drivers/net/wireless/xradio/common.h
 @@ -0,0 +1,101 @@
 +/*
 + * Common interfaces for XRadio drivers
@@ -3291,11 +3291,11 @@ index 000000000..1ce23dee0
 +}
 +
 +#endif //XRADIO_COMMON_H
-diff --git drivers/net/wireless/xradio/debug.h drivers/net/wireless/xradio/debug.h
+diff --git b/drivers/net/wireless/xradio/debug.h b/drivers/net/wireless/xradio/debug.h
 new file mode 100644
 index 000000000..205cb5cdc
 --- /dev/null
-+++ drivers/net/wireless/xradio/debug.h
++++ b/drivers/net/wireless/xradio/debug.h
 @@ -0,0 +1,158 @@
 +/*
 + * DebugFS code for XRadio drivers
@@ -3455,11 +3455,11 @@ index 000000000..205cb5cdc
 +	} while (0)
 +
 +#endif /* XRADIO_DEBUG_H_INCLUDED */
-diff --git drivers/net/wireless/xradio/firmware/device-xradio.mk drivers/net/wireless/xradio/firmware/device-xradio.mk
+diff --git b/drivers/net/wireless/xradio/firmware/device-xradio.mk b/drivers/net/wireless/xradio/firmware/device-xradio.mk
 new file mode 100644
 index 000000000..717685e8a
 --- /dev/null
-+++ drivers/net/wireless/xradio/firmware/device-xradio.mk
++++ b/drivers/net/wireless/xradio/firmware/device-xradio.mk
 @@ -0,0 +1,23 @@
 +#
 +# Copyright (C) 2008 The Android Open Source Project
@@ -3484,11 +3484,11 @@ index 000000000..717685e8a
 +    hardware/broadcom/wlan/bcmdhd/firmware/xr819/fw_xr819.bin:system/etc/firmware/fw_xr819.bin \
 +    hardware/broadcom/wlan/bcmdhd/firmware/xr819/sdd_xr819.bin:system/etc/firmware/sdd_xr819.bin
 +########################
-diff --git drivers/net/wireless/xradio/fwio.c drivers/net/wireless/xradio/fwio.c
+diff --git b/drivers/net/wireless/xradio/fwio.c b/drivers/net/wireless/xradio/fwio.c
 new file mode 100644
 index 000000000..29916ab26
 --- /dev/null
-+++ drivers/net/wireless/xradio/fwio.c
++++ b/drivers/net/wireless/xradio/fwio.c
 @@ -0,0 +1,549 @@
 +/*
 + * Firmware I/O implementation for XRadio drivers
@@ -4039,11 +4039,11 @@ index 000000000..29916ab26
 +	}
 +	return 0;
 +}
-diff --git drivers/net/wireless/xradio/fwio.h drivers/net/wireless/xradio/fwio.h
+diff --git b/drivers/net/wireless/xradio/fwio.h b/drivers/net/wireless/xradio/fwio.h
 new file mode 100644
 index 000000000..b5efeb15d
 --- /dev/null
-+++ drivers/net/wireless/xradio/fwio.h
++++ b/drivers/net/wireless/xradio/fwio.h
 @@ -0,0 +1,33 @@
 +/*
 + * Firmware APIs for XRadio drivers
@@ -4078,11 +4078,11 @@ index 000000000..b5efeb15d
 +int xradio_dev_deinit(struct xradio_common *hw_priv);
 +
 +#endif
-diff --git drivers/net/wireless/xradio/ht.c drivers/net/wireless/xradio/ht.c
+diff --git b/drivers/net/wireless/xradio/ht.c b/drivers/net/wireless/xradio/ht.c
 new file mode 100644
 index 000000000..a9b36300b
 --- /dev/null
-+++ drivers/net/wireless/xradio/ht.c
++++ b/drivers/net/wireless/xradio/ht.c
 @@ -0,0 +1,86 @@
 +#include <net/mac80211.h>
 +
@@ -4171,11 +4171,11 @@ index 000000000..a9b36300b
 +}
 +#endif //AP_HT_COMPAT_FIX
 \ No newline at end of file
-diff --git drivers/net/wireless/xradio/ht.h drivers/net/wireless/xradio/ht.h
+diff --git b/drivers/net/wireless/xradio/ht.h b/drivers/net/wireless/xradio/ht.h
 new file mode 100644
 index 000000000..346b425b4
 --- /dev/null
-+++ drivers/net/wireless/xradio/ht.h
++++ b/drivers/net/wireless/xradio/ht.h
 @@ -0,0 +1,44 @@
 +/*
 + * HT-related code for XRadio drivers
@@ -4221,11 +4221,11 @@ index 000000000..346b425b4
 +void xradio_remove_ht_ie(struct xradio_vif *priv, struct sk_buff *skb);
 +
 +#endif /* XRADIO_HT_H_INCLUDED */
-diff --git drivers/net/wireless/xradio/hwio.c drivers/net/wireless/xradio/hwio.c
+diff --git b/drivers/net/wireless/xradio/hwio.c b/drivers/net/wireless/xradio/hwio.c
 new file mode 100644
 index 000000000..7f1f1e26e
 --- /dev/null
-+++ drivers/net/wireless/xradio/hwio.c
++++ b/drivers/net/wireless/xradio/hwio.c
 @@ -0,0 +1,282 @@
 +/*
 + * Hardware I/O implementation for XRadio drivers
@@ -4509,11 +4509,11 @@ index 000000000..7f1f1e26e
 +	sdio_unlock(hw_priv);
 +	return ret;
 +}
-diff --git drivers/net/wireless/xradio/hwio.h drivers/net/wireless/xradio/hwio.h
+diff --git b/drivers/net/wireless/xradio/hwio.h b/drivers/net/wireless/xradio/hwio.h
 new file mode 100644
 index 000000000..531c2b8c8
 --- /dev/null
-+++ drivers/net/wireless/xradio/hwio.h
++++ b/drivers/net/wireless/xradio/hwio.h
 @@ -0,0 +1,229 @@
 +/*
 + * hardware interfaces for XRadio drivers
@@ -4744,11 +4744,11 @@ index 000000000..531c2b8c8
 +}
 +
 +#endif /* XRADIO_HWIO_H_INCLUDED */
-diff --git drivers/net/wireless/xradio/keys.c drivers/net/wireless/xradio/keys.c
+diff --git b/drivers/net/wireless/xradio/keys.c b/drivers/net/wireless/xradio/keys.c
 new file mode 100644
 index 000000000..efa704487
 --- /dev/null
-+++ drivers/net/wireless/xradio/keys.c
++++ b/drivers/net/wireless/xradio/keys.c
 @@ -0,0 +1,189 @@
 +#include <net/mac80211.h>
 +
@@ -4939,11 +4939,11 @@ index 000000000..efa704487
 +	mutex_unlock(&hw_priv->conf_mutex);
 +	return ret;
 +}
-diff --git drivers/net/wireless/xradio/keys.h drivers/net/wireless/xradio/keys.h
+diff --git b/drivers/net/wireless/xradio/keys.h b/drivers/net/wireless/xradio/keys.h
 new file mode 100644
 index 000000000..23c5880ef
 --- /dev/null
-+++ drivers/net/wireless/xradio/keys.h
++++ b/drivers/net/wireless/xradio/keys.h
 @@ -0,0 +1,12 @@
 +#ifndef __KEYS_H_
 +#define __KEYS_H_INCLUDED
@@ -4958,11 +4958,11 @@ index 000000000..23c5880ef
 +
 +#endif
 \ No newline at end of file
-diff --git drivers/net/wireless/xradio/main.c drivers/net/wireless/xradio/main.c
+diff --git b/drivers/net/wireless/xradio/main.c b/drivers/net/wireless/xradio/main.c
 new file mode 100644
 index 000000000..55377f633
 --- /dev/null
-+++ drivers/net/wireless/xradio/main.c
++++ b/drivers/net/wireless/xradio/main.c
 @@ -0,0 +1,617 @@
 +/*
 + * Main code of XRadio drivers
@@ -5581,11 +5581,11 @@ index 000000000..55377f633
 +	}
 +	return;
 +}
-diff --git drivers/net/wireless/xradio/main.h drivers/net/wireless/xradio/main.h
+diff --git b/drivers/net/wireless/xradio/main.h b/drivers/net/wireless/xradio/main.h
 new file mode 100644
 index 000000000..2238d7516
 --- /dev/null
-+++ drivers/net/wireless/xradio/main.h
++++ b/drivers/net/wireless/xradio/main.h
 @@ -0,0 +1,7 @@
 +#ifndef __XRADIO_MAIN_H
 +#define __XRADIO_MAIN_H
@@ -5595,11 +5595,11 @@ index 000000000..2238d7516
 +
 +#endif
 \ No newline at end of file
-diff --git drivers/net/wireless/xradio/module.c drivers/net/wireless/xradio/module.c
+diff --git b/drivers/net/wireless/xradio/module.c b/drivers/net/wireless/xradio/module.c
 new file mode 100644
 index 000000000..2a41c756f
 --- /dev/null
-+++ drivers/net/wireless/xradio/module.c
++++ b/drivers/net/wireless/xradio/module.c
 @@ -0,0 +1,27 @@
 +#include <linux/module.h>
 +
@@ -5628,11 +5628,11 @@ index 000000000..2a41c756f
 +
 +module_init(xradio_core_entry);
 +module_exit(xradio_core_exit);
-diff --git drivers/net/wireless/xradio/p2p.c drivers/net/wireless/xradio/p2p.c
+diff --git b/drivers/net/wireless/xradio/p2p.c b/drivers/net/wireless/xradio/p2p.c
 new file mode 100644
 index 000000000..f32fb4331
 --- /dev/null
-+++ drivers/net/wireless/xradio/p2p.c
++++ b/drivers/net/wireless/xradio/p2p.c
 @@ -0,0 +1,62 @@
 +#include "xradio.h"
 +
@@ -5697,11 +5697,11 @@ index 000000000..f32fb4331
 +}
 +#endif
 \ No newline at end of file
-diff --git drivers/net/wireless/xradio/p2p.h drivers/net/wireless/xradio/p2p.h
+diff --git b/drivers/net/wireless/xradio/p2p.h b/drivers/net/wireless/xradio/p2p.h
 new file mode 100644
 index 000000000..d86686b49
 --- /dev/null
-+++ drivers/net/wireless/xradio/p2p.h
++++ b/drivers/net/wireless/xradio/p2p.h
 @@ -0,0 +1,6 @@
 +#ifndef XRADIO_P2P_H
 +#define XRADIO_P2P_H
@@ -5709,11 +5709,11 @@ index 000000000..d86686b49
 +void xradio_frame_monitor(struct xradio_common *hw_priv, struct sk_buff *skb, bool tx);
 +
 +#endif
-diff --git drivers/net/wireless/xradio/pm.c drivers/net/wireless/xradio/pm.c
+diff --git b/drivers/net/wireless/xradio/pm.c b/drivers/net/wireless/xradio/pm.c
 new file mode 100644
 index 000000000..15468c6ff
 --- /dev/null
-+++ drivers/net/wireless/xradio/pm.c
++++ b/drivers/net/wireless/xradio/pm.c
 @@ -0,0 +1,785 @@
 +/*
 + * PM implementation for XRadio drivers
@@ -6500,11 +6500,11 @@ index 000000000..15468c6ff
 +	return 0;
 +}
 +#endif
-diff --git drivers/net/wireless/xradio/pm.h drivers/net/wireless/xradio/pm.h
+diff --git b/drivers/net/wireless/xradio/pm.h b/drivers/net/wireless/xradio/pm.h
 new file mode 100644
 index 000000000..12a14de37
 --- /dev/null
-+++ drivers/net/wireless/xradio/pm.h
++++ b/drivers/net/wireless/xradio/pm.h
 @@ -0,0 +1,56 @@
 +/*
 + * power management interfaces for XRadio drivers
@@ -6562,11 +6562,11 @@ index 000000000..12a14de37
 +#endif /* CONFIG_PM */
 +
 +#endif
-diff --git drivers/net/wireless/xradio/queue.c drivers/net/wireless/xradio/queue.c
+diff --git b/drivers/net/wireless/xradio/queue.c b/drivers/net/wireless/xradio/queue.c
 new file mode 100644
 index 000000000..8d245ee33
 --- /dev/null
-+++ drivers/net/wireless/xradio/queue.c
++++ b/drivers/net/wireless/xradio/queue.c
 @@ -0,0 +1,824 @@
 +/*
 + * Queue implementation for XRadio drivers
@@ -7392,11 +7392,11 @@ index 000000000..8d245ee33
 +	}
 +	return pending;
 +}
-diff --git drivers/net/wireless/xradio/queue.h drivers/net/wireless/xradio/queue.h
+diff --git b/drivers/net/wireless/xradio/queue.h b/drivers/net/wireless/xradio/queue.h
 new file mode 100644
 index 000000000..d6b64ce57
 --- /dev/null
-+++ drivers/net/wireless/xradio/queue.h
++++ b/drivers/net/wireless/xradio/queue.h
 @@ -0,0 +1,139 @@
 +/*
 + * queue operations for XRadio drivers
@@ -7537,11 +7537,11 @@ index 000000000..d6b64ce57
 +}
 +
 +#endif /* XRADIO_QUEUE_H_INCLUDED */
-diff --git drivers/net/wireless/xradio/rx.c drivers/net/wireless/xradio/rx.c
+diff --git b/drivers/net/wireless/xradio/rx.c b/drivers/net/wireless/xradio/rx.c
 new file mode 100644
 index 000000000..a859d4de6
 --- /dev/null
-+++ drivers/net/wireless/xradio/rx.c
++++ b/drivers/net/wireless/xradio/rx.c
 @@ -0,0 +1,398 @@
 +#include <net/mac80211.h>
 +
@@ -7941,11 +7941,11 @@ index 000000000..a859d4de6
 +	txrx_printk(XRADIO_DBG_WARN, "dropped received frame\n");
 +	return;
 +}
-diff --git drivers/net/wireless/xradio/rx.h drivers/net/wireless/xradio/rx.h
+diff --git b/drivers/net/wireless/xradio/rx.h b/drivers/net/wireless/xradio/rx.h
 new file mode 100644
 index 000000000..0c02b23d0
 --- /dev/null
-+++ drivers/net/wireless/xradio/rx.h
++++ b/drivers/net/wireless/xradio/rx.h
 @@ -0,0 +1,8 @@
 +#ifndef XRADIO_RX_H
 +#define XRADIO_RX_H
@@ -7955,11 +7955,11 @@ index 000000000..0c02b23d0
 +		  struct sk_buff **skb_p);
 +
 +#endif
-diff --git drivers/net/wireless/xradio/scan.c drivers/net/wireless/xradio/scan.c
+diff --git b/drivers/net/wireless/xradio/scan.c b/drivers/net/wireless/xradio/scan.c
 new file mode 100644
 index 000000000..9132f4578
 --- /dev/null
-+++ drivers/net/wireless/xradio/scan.c
++++ b/drivers/net/wireless/xradio/scan.c
 @@ -0,0 +1,893 @@
 +/*
 + * Scan implementation for XRadio drivers
@@ -8854,11 +8854,11 @@ index 000000000..9132f4578
 +
 +	return;
 +}
-diff --git drivers/net/wireless/xradio/scan.h drivers/net/wireless/xradio/scan.h
+diff --git b/drivers/net/wireless/xradio/scan.h b/drivers/net/wireless/xradio/scan.h
 new file mode 100644
 index 000000000..5688b3dcb
 --- /dev/null
-+++ drivers/net/wireless/xradio/scan.h
++++ b/drivers/net/wireless/xradio/scan.h
 @@ -0,0 +1,71 @@
 +/*
 + * Scan interfaces for XRadio drivers
@@ -8931,11 +8931,11 @@ index 000000000..5688b3dcb
 +void xradio_probe_work(struct work_struct *work);
 +
 +#endif /* SCAN_H_INCLUDED */
-diff --git drivers/net/wireless/xradio/sdio.c drivers/net/wireless/xradio/sdio.c
+diff --git b/drivers/net/wireless/xradio/sdio.c b/drivers/net/wireless/xradio/sdio.c
 new file mode 100644
 index 000000000..cfff47120
 --- /dev/null
-+++ drivers/net/wireless/xradio/sdio.c
++++ b/drivers/net/wireless/xradio/sdio.c
 @@ -0,0 +1,246 @@
 +/*
 + * SDIO driver for XRadio drivers
@@ -9183,11 +9183,11 @@ index 000000000..cfff47120
 +}
 +
 +MODULE_DEVICE_TABLE(sdio, xradio_sdio_ids);
-diff --git drivers/net/wireless/xradio/sdio.h drivers/net/wireless/xradio/sdio.h
+diff --git b/drivers/net/wireless/xradio/sdio.h b/drivers/net/wireless/xradio/sdio.h
 new file mode 100644
 index 000000000..ea3c45a00
 --- /dev/null
-+++ drivers/net/wireless/xradio/sdio.h
++++ b/drivers/net/wireless/xradio/sdio.h
 @@ -0,0 +1,17 @@
 +#ifndef __XRADIO_SDIO_H
 +#define __XRADIO_SDIO_H
@@ -9206,11 +9206,11 @@ index 000000000..ea3c45a00
 +void xradio_sdio_unregister(void);
 +
 +#endif
-diff --git drivers/net/wireless/xradio/sta.c drivers/net/wireless/xradio/sta.c
+diff --git b/drivers/net/wireless/xradio/sta.c b/drivers/net/wireless/xradio/sta.c
 new file mode 100644
 index 000000000..f0b41cc59
 --- /dev/null
-+++ drivers/net/wireless/xradio/sta.c
++++ b/drivers/net/wireless/xradio/sta.c
 @@ -0,0 +1,2251 @@
 +/*
 + * STA APIs for XRadio drivers
@@ -11463,11 +11463,11 @@ index 000000000..f0b41cc59
 +	return 0;
 +}
 +#endif /*ROAM_OFFLOAD*/
-diff --git drivers/net/wireless/xradio/sta.h drivers/net/wireless/xradio/sta.h
+diff --git b/drivers/net/wireless/xradio/sta.h b/drivers/net/wireless/xradio/sta.h
 new file mode 100644
 index 000000000..d70274fe1
 --- /dev/null
-+++ drivers/net/wireless/xradio/sta.h
++++ b/drivers/net/wireless/xradio/sta.h
 @@ -0,0 +1,130 @@
 +/*
 + * sta interfaces for XRadio drivers
@@ -11599,11 +11599,11 @@ index 000000000..d70274fe1
 +                          const void *data, int len, gfp_t gfp);
 +#endif /*ROAM_OFFLOAD*/
 +#endif
-diff --git drivers/net/wireless/xradio/tx.c drivers/net/wireless/xradio/tx.c
+diff --git b/drivers/net/wireless/xradio/tx.c b/drivers/net/wireless/xradio/tx.c
 new file mode 100644
 index 000000000..af7f36989
 --- /dev/null
-+++ drivers/net/wireless/xradio/tx.c
++++ b/drivers/net/wireless/xradio/tx.c
 @@ -0,0 +1,1455 @@
 +/*
 + * Datapath implementation for XRadio drivers
@@ -13060,11 +13060,11 @@ index 000000000..af7f36989
 +	}
 +}
 +#endif
-diff --git drivers/net/wireless/xradio/tx.h drivers/net/wireless/xradio/tx.h
+diff --git b/drivers/net/wireless/xradio/tx.h b/drivers/net/wireless/xradio/tx.h
 new file mode 100644
 index 000000000..28a9e2d8d
 --- /dev/null
-+++ drivers/net/wireless/xradio/tx.h
++++ b/drivers/net/wireless/xradio/tx.h
 @@ -0,0 +1,92 @@
 +/*
 + * txrx interfaces for XRadio drivers
@@ -13158,11 +13158,11 @@ index 000000000..28a9e2d8d
 +#endif
 +
 +#endif /* XRADIO_TXRX_H */
-diff --git drivers/net/wireless/xradio/wsm.c drivers/net/wireless/xradio/wsm.c
+diff --git b/drivers/net/wireless/xradio/wsm.c b/drivers/net/wireless/xradio/wsm.c
 new file mode 100644
 index 000000000..3bf8bfde5
 --- /dev/null
-+++ drivers/net/wireless/xradio/wsm.c
++++ b/drivers/net/wireless/xradio/wsm.c
 @@ -0,0 +1,3013 @@
 +/*
 + * WSM host interfaces for XRadio drivers
@@ -16177,11 +16177,11 @@ index 000000000..3bf8bfde5
 +	else
 +		return -1;
 +}
-diff --git drivers/net/wireless/xradio/wsm.h drivers/net/wireless/xradio/wsm.h
+diff --git b/drivers/net/wireless/xradio/wsm.h b/drivers/net/wireless/xradio/wsm.h
 new file mode 100644
 index 000000000..8056abce1
 --- /dev/null
-+++ drivers/net/wireless/xradio/wsm.h
++++ b/drivers/net/wireless/xradio/wsm.h
 @@ -0,0 +1,2354 @@
 +/*
 + * wsm interfaces for XRadio drivers
@@ -18537,11 +18537,11 @@ index 000000000..8056abce1
 +}
 +
 +#endif /* XRADIO_HWIO_H_INCLUDED */
-diff --git drivers/net/wireless/xradio/xr-install.sh drivers/net/wireless/xradio/xr-install.sh
+diff --git b/drivers/net/wireless/xradio/xr-install.sh b/drivers/net/wireless/xradio/xr-install.sh
 new file mode 100755
 index 000000000..daf3a26b9
 --- /dev/null
-+++ drivers/net/wireless/xradio/xr-install.sh
++++ b/drivers/net/wireless/xradio/xr-install.sh
 @@ -0,0 +1,82 @@
 +#!/bin/bash
 +if [[ $EUID != 0 ]]; then
@@ -18625,11 +18625,11 @@ index 000000000..daf3a26b9
 +echo "NanoPi Duo:	<tbd>"
 +echo "Sunvell R69:	<tbd>"
 +exit
-diff --git drivers/net/wireless/xradio/xradio.h drivers/net/wireless/xradio/xradio.h
+diff --git b/drivers/net/wireless/xradio/xradio.h b/drivers/net/wireless/xradio/xradio.h
 new file mode 100644
 index 000000000..d565db086
 --- /dev/null
-+++ drivers/net/wireless/xradio/xradio.h
++++ b/drivers/net/wireless/xradio/xradio.h
 @@ -0,0 +1,577 @@
 +/*
 + * Common define of private data for XRadio drivers
@@ -19214,7 +19214,7 @@ diff --git arch/arm64/include/asm/mach-types.h arch/arm64/include/asm/mach-types
 new file mode 100644
 index 000000000..9f82efe00
 --- /dev/null
-+++ arch/arm64/include/asm/mach-types.h
++++ b/arch/arm64/include/asm/mach-types.h
 @@ -0,0 +1,5060 @@
 +/*
 + * This was automagically generated from arch/arm/tools/mach-types!

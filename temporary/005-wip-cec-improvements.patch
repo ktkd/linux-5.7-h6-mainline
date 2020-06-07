@@ -1,7 +1,7 @@
 diff --git drivers/gpu/drm/bridge/synopsys/dw-hdmi-cec.c drivers/gpu/drm/bridge/synopsys/dw-hdmi-cec.c
 index 70ab4fbdc..4dbc370e5 100644
---- drivers/gpu/drm/bridge/synopsys/dw-hdmi-cec.c
-+++ drivers/gpu/drm/bridge/synopsys/dw-hdmi-cec.c
+--- a/drivers/gpu/drm/bridge/synopsys/dw-hdmi-cec.c
++++ b/drivers/gpu/drm/bridge/synopsys/dw-hdmi-cec.c
 @@ -4,6 +4,7 @@
   *
   * Copyright (C) 2015-2017 Russell King.
@@ -52,8 +52,8 @@ index 70ab4fbdc..4dbc370e5 100644
 
 diff --git drivers/gpu/drm/sun4i/Kconfig drivers/gpu/drm/sun4i/Kconfig
 index 5755f0432..7cc3d153d 100644
---- drivers/gpu/drm/sun4i/Kconfig
-+++ drivers/gpu/drm/sun4i/Kconfig
+--- a/drivers/gpu/drm/sun4i/Kconfig
++++ b/drivers/gpu/drm/sun4i/Kconfig
 @@ -61,6 +61,16 @@ config DRM_SUN8I_DW_HDMI
  	  DesignWare HDMI controller with custom HDMI PHY. If M is
  	  selected the module will be called sun8i_dw_hdmi.
@@ -75,8 +75,8 @@ index 5755f0432..7cc3d153d 100644
 
 diff --git drivers/gpu/drm/sun4i/sun8i_dw_hdmi.h drivers/gpu/drm/sun4i/sun8i_dw_hdmi.h
 index 8e6494516..3d87a1591 100644
---- drivers/gpu/drm/sun4i/sun8i_dw_hdmi.h
-+++ drivers/gpu/drm/sun4i/sun8i_dw_hdmi.h
+--- a/drivers/gpu/drm/sun4i/sun8i_dw_hdmi.h
++++ b/drivers/gpu/drm/sun4i/sun8i_dw_hdmi.h
 @@ -13,6 +13,8 @@
  #include <linux/regmap.h>
  #include <linux/regulator/consumer.h>
@@ -121,8 +121,8 @@ index 8e6494516..3d87a1591 100644
 
 diff --git drivers/gpu/drm/sun4i/sun8i_hdmi_phy.c drivers/gpu/drm/sun4i/sun8i_hdmi_phy.c
 index 43643ad31..611d304a1 100644
---- drivers/gpu/drm/sun4i/sun8i_hdmi_phy.c
-+++ drivers/gpu/drm/sun4i/sun8i_hdmi_phy.c
+--- a/drivers/gpu/drm/sun4i/sun8i_hdmi_phy.c
++++ b/drivers/gpu/drm/sun4i/sun8i_hdmi_phy.c
 @@ -504,8 +504,9 @@ static void sun8i_hdmi_phy_init_h3(struct sun8i_hdmi_phy *phy)
  	regmap_update_bits(phy->regs, SUN8I_HDMI_PHY_PLL_CFG1_REG,
  			   SUN8I_HDMI_PHY_PLL_CFG1_CKIN_SEL_MSK, 0);

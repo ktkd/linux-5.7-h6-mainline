@@ -1,7 +1,7 @@
 diff --git sound/soc/sunxi/sun4i-i2s.c sound/soc/sunxi/sun4i-i2s.c
 index d0a8d5810..73d5bd489 100644
---- sound/soc/sunxi/sun4i-i2s.c
-+++ sound/soc/sunxi/sun4i-i2s.c
+--- a/sound/soc/sunxi/sun4i-i2s.c
++++ b/sound/soc/sunxi/sun4i-i2s.c
 @@ -23,7 +23,7 @@
  
  #define SUN4I_I2S_CTRL_REG		0x00

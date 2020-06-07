@@ -1,7 +1,7 @@
 diff --git sound/soc/codecs/hdmi-codec.c sound/soc/codecs/hdmi-codec.c
 index f005751da..56863a5a3 100644
---- sound/soc/codecs/hdmi-codec.c
-+++ sound/soc/codecs/hdmi-codec.c
+--- a/sound/soc/codecs/hdmi-codec.c
++++ b/sound/soc/codecs/hdmi-codec.c
 @@ -195,78 +195,69 @@ static const struct snd_pcm_chmap_elem hdmi_codec_8ch_chmaps[] = {
   */
  static const struct hdmi_codec_cea_spk_alloc hdmi_codec_channel_alloc[] = {
@@ -136,8 +136,8 @@ index f005751da..56863a5a3 100644
  
 diff --git drivers/gpu/drm/bridge/synopsys/dw-hdmi.c drivers/gpu/drm/bridge/synopsys/dw-hdmi.c
 index 383b1073d..1919e592c 100644
---- drivers/gpu/drm/bridge/synopsys/dw-hdmi.c
-+++ drivers/gpu/drm/bridge/synopsys/dw-hdmi.c
+--- a/drivers/gpu/drm/bridge/synopsys/dw-hdmi.c
++++ b/drivers/gpu/drm/bridge/synopsys/dw-hdmi.c
 @@ -41,8 +41,6 @@
  #define DDC_CI_ADDR		0x37
  #define DDC_SEGMENT_ADDR	0x30
